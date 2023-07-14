@@ -12,6 +12,9 @@ permissions:
 on:
   workflow_dispatch:
     inputs:
+      permissions:
+      id-token: write
+      contents: read
       region:
         description: 'AWS Region to deploy to'
         required: true
@@ -51,7 +54,7 @@ jobs:
 
     - name: Deploy to Amplify Console with CloudFormation
       id: amplify-stack
-      uses: aws-actions/aws-cloudformation-github-deploy@v1
+      uses: aws-actions/aws-cloudformation-github-deploy@master
       with:
         name: ${{ steps.env-name.outputs.environment }}
         template: stack.yaml
